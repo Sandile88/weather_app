@@ -1,0 +1,43 @@
+{
+  "coord": {
+    "lon": 28.0589,
+    "lat": -26.0545
+  },
+  "weather": [
+    {
+      "id": 800,
+      "main": "Clear",
+      "description": "clear sky",
+      "icon": "01n"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 18.46,
+    "feels_like": 18.4,
+    "temp_min": 17.68,
+    "temp_max": 19.08,
+    "pressure": 1022,
+    "humidity": 78
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 2.57,
+    "deg": 110
+  },
+  "clouds": {
+    "all": 1
+  },
+  "dt": 1710450556,
+  "sys": {
+    "type": 2,
+    "id": 2005523,
+    "country": "ZA",
+    "sunrise": 1710389315,
+    "sunset": 1710433520
+  },
+  "timezone": 7200,
+  "id": 957655,
+  "name": "Sandton",
+  "cod": 200
+}
