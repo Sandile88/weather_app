@@ -10,6 +10,7 @@ from icon_symbols import *
 load_dotenv()
 api_key = os.environ['API_KEY']    
 
+
 @dataclass
 class WeatherData:
 
@@ -23,6 +24,7 @@ class WeatherData:
         output = '\n'.join([f" {key}: {value}°C" if 'temp' or 'feel_like'  in key  else f"   {key}: {value}" for key, value in self.temperature.items() if key in ['temp', 'feels_like', 'temp_min', 'temp_max']])
         symbol = icon_symbols.get(self.icon, self.icon)
         return f"\nCurrent weather:\n\nMain: {self.main}, {self.description}\n Icon: {symbol}\nTemperatures: \n{output}\nPressure: {self.temperature['pressure']}hPa\nHumidity: {self.temperature['humidity']}% \nSpeed: {self.speed} m/s"
+
 
 def get_weather_data(city, country):
     url= f'https://api.openweathermap.org/data/2.5/weather?q={city},{country}&appid={api_key}&units=metric'
@@ -59,7 +61,7 @@ def main():
     try:
         while True:
             city = input('City?: ').lower()
-            country = input('Country?: ').capitalize()
+            country = input('Country?: ').lower()
 
             response = get_weather_data(city, country)
 
