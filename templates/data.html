@@ -7,40 +7,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+    
 </head>
-<body class="bg-info text-white">
+<body class="text-white" {% if background_image %} style="background-image: url('{{ background_image }}')" {% endif %}>
     <div class="text-center">
         <h1 class="mt-5">Weather Report</h1>
         <form action="/" method="post" class="mt-4">
+
             <div class="container">
                 <div class="row justify-content-center">
+
                     <div class="col-auto">
                         <input type="text" id="cityName" name="cityName" placeholder="City" class="form-control">
                     </div>
+
                     <div class="col-auto">
+
                         <input type="text" id="countryName" name="countryName" placeholder="Country" class="form-control">
                     </div>
+                    <div class="col-auto">
+
+                        <button class="btn btn-light">Find</button>
+                    </div>
                 </div>
-            </div class=col-sm> <br>
-                <button class="btn btn-light">Find</button>
-        </form>
-        {% if data %}
-        <div class="mt-4">
-            <h2 class="text-center">Current weather:</h2>
-            <p class="text-center">Main: {{ data.main }}, {{ data.description }}</p>
-            <div class="text-center">
-                <img src="https://openweathermap.org/img/wn/{{ data.icon }}@2x.png" alt="Weather Icon">
-                <span>{{ data.temperature.temp }}°C</span>
+            </form>
+
+            <div class="mt-4">
+            {% if error_message %}
+            <p>{{ error_message }}</p>
+            {% endif %}
             </div>
-            <p class="text-center">Feels like: {{ data.temperature.feels_like }}°C</p>
-            <p class="text-center">Maximum temp: {{ data.temperature.temp_max }}°C</p>
-            <p class="text-center">Minimum temp: {{ data.temperature.temp_min }}°C</p>
-            <p class="text-center">Pressure: {{ data.temperature.pressure }}hPa</p>
-            <p class="text-center">Humidity: {{ data.temperature.humidity }}%</p>
-            <p class="text-center">Speed: {{ data.speed }} m/s</p>
+
+            {% if data %}
+            .
+                <h2 class="text-center">Current weather:</h2>
+                <p class="text-center">Main: {{ data.main }}, {{ data.description }}</p>
+                <div class="text-center">
+                    <img src="https://openweathermap.org/img/wn/{{ data.icon }}@2x.png" alt="Weather Icon">
+                    <span>{{ data.temperature.temp }}°C</span>
+                </div>
+                
+                <div class="weather">
+                <div class="left">
+                    <p class="text-center">Feels like: {{ data.temperature.feels_like }}°C</p>
+                    <p class="text-center">Maximum temp: {{ data.temperature.temp_max }}°C</p>
+                    <p class="text-center">Minimum temp: {{ data.temperature.temp_min }}°C</p>
+                </div>
+
+                <div class="right">
+                    <p class="text-center">Pressure: {{ data.temperature.pressure }}hPa</p>
+                    <p class="text-center">Humidity: {{ data.temperature.humidity }}%</p>
+                    <p class="text-center">Speed: {{ data.speed }} m/s</p>
+                </div>
+                </div>
+
+                </div class=col-sm> <br>
         </div>
         {% endif %}
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
     crossorigin="anonymous"></script>

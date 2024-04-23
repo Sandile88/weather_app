@@ -1,0 +1,128 @@
+
+:root {
+    --white: #ffffff;
+    --off-white: #e5e5e5;
+    --transp-white-1: rgba(255, 255, 255, 0.25);
+    --transp-white-2: rgba(255, 255, 255, 0.18);
+    --blue-1: #62b8f5;
+    --blue-2: #4475ef;
+    --shadow: rgba(3, 46, 87, 0.2);
+  }
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+
+.container{
+  width: 50%;;
+  background: var(--transp-white-2);
+  backdrop-filter: blur(10px);
+  margin: auto;
+  padding: 2rem;
+  border: 2px solid var(--transp-white-2);
+  border-radius: 10px;
+  color:rgb(5,41,51);
+  height: 550px;
+}
+
+
+  input, .btn ::placeholder{
+    background-color: transparent;
+    
+    padding: .5rem;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid white;
+  }
+
+
+  .btn{
+    padding: .5rem 1rem;
+   
+    border:2px solid #04009A ;
+    cursor:pointer;
+    transition:.3s;
+    color: var(--blue-2);
+    background-color: transparent;
+    border-radius: 0.3em;
+  }
+
+  .btn:hover{
+    transform: translateY(-3px);
+    background-color:rgb(5,41,51);
+    color:#fff ;
+  }
+
+
+  .weather{
+    margin-top:2rem;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    height:150px;
+    background: var(--transp-white-1);
+    backdrop-filter: blur(10px);
+    
+  }
+
+  .left{
+    
+    width:100%;
+    padding:.3rem;
+    padding-bottom: 0;
+    border-radius:10px 0 0 10px;
+    height:220px;
+    line-height:3;
+    background: var(--transp-white-2);
+    backdrop-filter: blur(10px);
+    
+  }
+
+
+  .right{
+    padding:.3rem;
+    padding-bottom: 0;
+    height:220px;
+    width:100%;
+    border-radius:0 10px 10px 0;
+    line-height:3;
+    background: var(--transp-white-2);
+    backdrop-filter: blur(10px);
+  
+  }
+
+  
+/* small devs */
+@media(min-width: 300px){
+  .container{
+    width: 90vw;
+    height: 90vh;
+  }
+
+  .col-auto{
+    margin: 1rem;
+  }
+
+  .left{
+    margin: 1rem;
+  }
+}
+
+
+body {    
+    background-image: url("https://images.pexels.com/photos/5725589/pexels-photo-5725589.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+   
+}
+
+
+
+
+
+
