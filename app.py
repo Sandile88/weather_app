@@ -23,7 +23,7 @@ def get_background_images(city):
     return DEFAULT_BACKGROUND_IMAGE
    
 
-get_background_images('South Africa')
+# get_background_images('South Africa')
 
 
 @app.route('/', methods = ['GET', 'POST'])
