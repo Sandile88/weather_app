@@ -22,18 +22,17 @@ class WeatherData:
     speed: float
 
     def __str__(self) -> str:
-        output = '\n'.join([f" {key}: {value}°C" if 'temp' or 'feel_like'  in key  else f"   {key}: {value}" for key, value in self.temperature.items() if key in ['temp', 'feels_like', 'temp_min', 'temp_max']])
+        output = '\n'.join([f" {key}: {value}°C" if 'temp' or 'feel_like'  in key  else f" {key}: {value}" for key, value in self.temperature.items() if key in ['temp', 'feels_like', 'temp_min', 'temp_max']])
         symbol = icon_symbols.get(self.icon, self.icon)
-        return f"""\n
-        Current weather:\n\n
-        Date: {self.timestamp}\n
-        Main: {self.main}, {self.description}\n 
-        Icon: {symbol}\n
-        Temperatures: \n{output}\n
-        Pressure: {self.temperature['pressure']}hPa\n
-        Humidity: {self.temperature['humidity']}% \n
-        Speed: {self.speed} m/s
-        """
+        return f"""
+Date: {self.timestamp}\n
+Main: {self.main}, {self.description}\n 
+Icon: {symbol}\n
+Temperatures: \n{output}\n
+Pressure: {self.temperature['pressure']}hPa\n
+Humidity: {self.temperature['humidity']}% \n
+Speed: {self.speed} m/s
+"""
 
 
 def get_weather_data(city, country):
@@ -74,8 +73,9 @@ def get_weather_data(city, country):
             for key in temp_keys:
                 if key in temp_data:
                     temp_data[key] = int(temp_data[key])
+
             data = WeatherData(
-                timestamp=forecast['dt_txt'],
+                timestamp = forecast['dt_txt'][:10],
                 main = forecast['weather'][0]['main'],
                 description = forecast['weather'][0]['description'],
                 icon = forecast['weather'][0]['icon'],
@@ -85,20 +85,28 @@ def get_weather_data(city, country):
             weather_data_list.append(data)
 
         return weather_data_list
+    
+
 def main():
     try:
         while True:
             city = input('City?: ').lower()
             country = input('Country?: ').lower()
+            print("\nCurrent weather:")
 
             response = get_weather_data(city, country)
 
             if response:
+                duplicate_timestamps = set()
+                unique_weather_data = []
                 for weather in response:
-                    print(weather)
+                    if weather.timestamp not in duplicate_timestamps:
+                        unique_weather_data.append(weather)
+                        duplicate_timestamps.add(weather.timestamp)
+                        print(weather)
                 break
 
-        response_dict = [weather.__dict__ for weather in response]
+        response_dict = [weather.__dict__ for weather in unique_weather_data]
         with open ('data.json', 'w') as f:
             json.dump(response_dict, f, indent=2)
 
