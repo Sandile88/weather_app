@@ -68,7 +68,7 @@ def get_weather_data(city, country):
         weather_data_list = []
         unique_dates = set()
         for forecast in response['list']:
-            date = forecast['dt_txt'][:10]
+            date = forecast['dt_txt'][:10],
             if date not in unique_dates:
                 unique_dates.add(date)
                 temp_data = forecast['main']
@@ -104,13 +104,12 @@ def main():
                 # unique_weather_data = []
                 for weather in response:
                     # if weather.timestamp not in duplicate_timestamps:
-                    #     unique_weather_data.append(weather)
-                    #     duplicate_timestamps.add(weather.timestamp)
+                        # unique_weather_data.append(weather)
+                        # duplicate_timestamps.add(weather.timestamp)
                         print(weather)
                 break
 
         response_dict = [weather.__dict__ for weather in response]
-        # response_dict = [weather.__dict__ for weather in unique_weather_data]
         with open ('data.json', 'w') as f:
             json.dump(response_dict, f, indent=2)
 
