@@ -8,6 +8,8 @@ import os
 load_dotenv()
 app = Flask(__name__)
 PEXELS_API_KEY = os.environ['PEXELS_API_KEY']
+SEARCH_ENGINE_ID = os.environ['SEARCH_ENGINE_ID']
+GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 
 DEFAULT_BACKGROUND_IMAGE = 'https://images.pexels.com/photos/2189696/pexels-photo-2189696.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
 
@@ -24,6 +26,30 @@ def get_background_images(city):
    
 # get_background_images('South Africa')
 
+def background(city):
+    search_query =city
+
+    url = "https://googleapis.com/customsearch/v1"
+
+    params = {
+        "q": search_query,
+        "key": GOOGLE_API_KEY,
+        "cx": SEARCH_ENGINE_ID
+    }
+
+    response = requests.get(url, params=params)
+# print(response.text)
+
+    data = response.json()['items']
+# if data['total_results'] > 0:
+#     return data['photos'][0]['src']['original']
+    # for item in data:
+    #     print(item['link'])
+
+    if data:
+        print(data[0]['link'])
+
+
 
 @app.route('/', methods = ['GET', 'POST'])
 def home():
@@ -36,7 +62,8 @@ def home():
             city = request.form['cityName'].lower()
             country = request.form['countryName'].lower()
             weather_data_list = get_weather_data(city, country)
-            background_image = get_background_images(city)
+            # background_image = get_background_images(city)
+            background_image = background(city)
 
 
             if not city:
