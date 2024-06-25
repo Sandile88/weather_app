@@ -31,6 +31,7 @@
                         <button class="btn btn-light">Find</button>
                     </div>
                 </div>
+                </div>
             </form>
 
             <div class="mt-4">
@@ -40,31 +41,35 @@
             </div>
 
             {% if data %}
-            .
-                <h2 class="text-center">Current weather:</h2>
-                <p class="text-center">Main: {{ data.main }}, {{ data.description }}</p>
+                <h2 class="text-center">Weather Forecast:</h2>
+                {% for day in data %}
+                <div class="mt-4">
+                    <h3 class="text-center"> {{ day.timestamp }}</h3>
+                <p class="text-center">Main: {{ day.main }}, {{ day.description }}</p>
                 <div class="text-center">
-                    <img src="https://openweathermap.org/img/wn/{{ data.icon }}@2x.png" alt="Weather Icon">
-                    <span>{{ data.temperature.temp }}°C</span>
+                    <img src="https://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather Icon">
+                    <span>{{ day.temperature['temp'] }}°C</span>
                 </div>
                 
                 <div class="weather">
                 <div class="left">
-                    <p class="text-center">Feels like: {{ data.temperature.feels_like }}°C</p>
-                    <p class="text-center">Maximum temp: {{ data.temperature.temp_max }}°C</p>
-                    <p class="text-center">Minimum temp: {{ data.temperature.temp_min }}°C</p>
+                    <p class="text-center">Feels like: {{ day.temperature['feels_like'] }}°C</p>
+                    <p class="text-center">Maximum temp: {{ day.temperature['temp_max'] }}°C</p>
+                    <p class="text-center">Minimum temp: {{ day.temperature['temp_min'] }}°C</p>
                 </div>
 
                 <div class="right">
-                    <p class="text-center">Pressure: {{ data.temperature.pressure }}hPa</p>
-                    <p class="text-center">Humidity: {{ data.temperature.humidity }}%</p>
-                    <p class="text-center">Speed: {{ data.speed }} m/s</p>
+                    <p class="text-center">Pressure: {{ day.temperature['pressure'] }}hPa</p>
+                    <p class="text-center">Humidity: {{ day.temperature['humidity'] }}%</p>
+                    <p class="text-center">Speed: {{ day.speed }} m/s</p>
                 </div>
                 </div>
 
-                </div class=col-sm> <br>
+                <!-- </div class=col-sm> <br> -->
         </div>
+        {% endfor %}
         {% endif %}
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
     crossorigin="anonymous"></script>

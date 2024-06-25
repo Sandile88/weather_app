@@ -22,21 +22,20 @@ def get_background_images(city):
 
     return DEFAULT_BACKGROUND_IMAGE
    
-
 # get_background_images('South Africa')
 
 
 @app.route('/', methods = ['GET', 'POST'])
 def home():
     try:  
-        data = ""
+        data = None
         error_message = None
         background_image = None
 
         if request.method == 'POST':
             city = request.form['cityName'].lower()
             country = request.form['countryName'].lower()
-            data = get_weather_data(city, country)
+            weather_data_list = get_weather_data(city, country)
             background_image = get_background_images(city)
 
 
@@ -46,10 +45,11 @@ def home():
             if not country:
                 error_message =f"City '{country}' not found. Please try again."
                 return render_template('data.html',error_message=error_message, background_image=background_image)
-            if data is None:
+            if weather_data_list is None:
                 error_message = f"City '{city}' and country '{country}' not found. Please try again."
                 return render_template('data.html',error_message=error_message, background_image=background_image)
 
+            data = weather_data_list
 
         return render_template('data.html', data=data, error_message=error_message, background_image=background_image)
     except ConnectionError:

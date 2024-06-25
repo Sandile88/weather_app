@@ -66,23 +66,26 @@ def get_weather_data(city, country):
         return None
     else:
         weather_data_list = []
+        unique_dates = set()
         for forecast in response['list']:
+            date = forecast['dt_txt'][:10]
+            if date not in unique_dates:
+                unique_dates.add(date)
+                temp_data = forecast['main']
+                temp_keys =['temp', 'feels_like', 'temp_min', 'temp_max']
+                for key in temp_keys:
+                    if key in temp_data:
+                        temp_data[key] = int(temp_data[key])
 
-            temp_data = forecast['main']
-            temp_keys =['temp', 'feels_like', 'temp_min', 'temp_max']
-            for key in temp_keys:
-                if key in temp_data:
-                    temp_data[key] = int(temp_data[key])
-
-            data = WeatherData(
-                timestamp = forecast['dt_txt'][:10],
-                main = forecast['weather'][0]['main'],
-                description = forecast['weather'][0]['description'],
-                icon = forecast['weather'][0]['icon'],
-                temperature = temp_data,
-                speed = forecast['wind'].get('speed')
-            )
-            weather_data_list.append(data)
+                data = WeatherData(
+                    timestamp = forecast['dt_txt'][:10],
+                    main = forecast['weather'][0]['main'],
+                    description = forecast['weather'][0]['description'],
+                    icon = forecast['weather'][0]['icon'],
+                    temperature = temp_data,
+                    speed = forecast['wind'].get('speed')
+                )
+                weather_data_list.append(data)
 
         return weather_data_list
     
@@ -97,16 +100,17 @@ def main():
             response = get_weather_data(city, country)
 
             if response:
-                duplicate_timestamps = set()
-                unique_weather_data = []
+                # duplicate_timestamps = set()
+                # unique_weather_data = []
                 for weather in response:
-                    if weather.timestamp not in duplicate_timestamps:
-                        unique_weather_data.append(weather)
-                        duplicate_timestamps.add(weather.timestamp)
+                    # if weather.timestamp not in duplicate_timestamps:
+                    #     unique_weather_data.append(weather)
+                    #     duplicate_timestamps.add(weather.timestamp)
                         print(weather)
                 break
 
-        response_dict = [weather.__dict__ for weather in unique_weather_data]
+        response_dict = [weather.__dict__ for weather in response]
+        # response_dict = [weather.__dict__ for weather in unique_weather_data]
         with open ('data.json', 'w') as f:
             json.dump(response_dict, f, indent=2)
 
