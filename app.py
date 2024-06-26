@@ -26,28 +26,67 @@ def get_background_images(city):
    
 # get_background_images('South Africa')
 
+# def background(city):
+#     search_query = city
+
+#     url = "https://googleapis.com/customsearch/v1"
+
+#     params = {
+#         "q": search_query,
+#         "key": GOOGLE_API_KEY,
+#         "cx": SEARCH_ENGINE_ID,
+#         "searchType": "image" 
+#     }
+
+#     # url = f"https://googleapis.com/customsearch/v1?key={GOOGLE_API_KEY}&cx={SEARCH_ENGINE_ID}&q={search_query}&searchType={searchTYpe}&imgSize=xlarge"
+
+#     response = requests.get(url, params=params)
+# # print(response.text)
+
+#     data = response.json()['items']
+# # if data['total_results'] > 0:
+# #     return data['photos'][0]['src']['original']
+#     # for item in data:
+#     #     print(item['link'])
+
+#     if data:
+#         # print(data[0]['link'])
+#         return data[1]['link']
+    
+
+
 def background(city):
-    search_query =city
-
-    url = "https://googleapis.com/customsearch/v1"
-
+    search_query = city
+    url = "https://www.googleapis.com/customsearch/v1"
     params = {
         "q": search_query,
         "key": GOOGLE_API_KEY,
-        "cx": SEARCH_ENGINE_ID
+        "cx": SEARCH_ENGINE_ID,
+        "searchType": "image"
     }
 
-    response = requests.get(url, params=params)
-# print(response.text)
+    try:
+        response = requests.get(url, params=params)
+        response.raise_for_status()  # Raises an error for bad status codes
+        data = response.json()
+        
+        if 'items' in data and data['items']:
+            print(data['items'][0]['link'])
+            return data['items'][0]['link']
+        else:
+            print("No items found in the response.")
+            return DEFAULT_BACKGROUND_IMAGE
+        
+    except requests.exceptions.HTTPError as http_err:
+        print(f"HTTP error occurred: {http_err}")
+        return DEFAULT_BACKGROUND_IMAGE
+    except requests.exceptions.RequestException as req_err:
+        print(f"Request error occurred: {req_err}")
+        return DEFAULT_BACKGROUND_IMAGE
+    except ValueError as json_err:
+        print(f"JSON decode error: {json_err}")
+        return DEFAULT_BACKGROUND_IMAGE
 
-    data = response.json()['items']
-# if data['total_results'] > 0:
-#     return data['photos'][0]['src']['original']
-    # for item in data:
-    #     print(item['link'])
-
-    if data:
-        print(data[0]['link'])
 
 
 
