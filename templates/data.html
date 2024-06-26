@@ -43,7 +43,7 @@
             {% if data %}
                 <h2 class="text-center">Weather Forecast:</h2>
                 {% for day in data %}
-                <div class="mt-4">
+                <!-- <div class="mt-4"> -->
                     <h3 class="text-center"> {{ day.timestamp }}</h3>
                 <p class="text-center">Main: {{ day.main }}, {{ day.description }}</p>
                 <div class="text-center">
@@ -64,9 +64,10 @@
                     <p class="text-center">Speed: {{ day.speed }} m/s</p>
                 </div>
                 </div>
+                
 
                 <!-- </div class=col-sm> <br> -->
-        </div>
+        <!-- </div> -->
         {% endfor %}
         {% endif %}
     </div>
