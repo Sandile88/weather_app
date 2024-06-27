@@ -30,13 +30,13 @@
 
         <div class="mt-4">
             {% if error_message %}
-            <p>{{ error_message }}</p>
+              <p>{{ error_message }}</p>
             {% endif %}
         </div>
 
         {% if data %}
         <div class="current-weather">
-            <div class="header-row">Current weather</div>
+            <div class="header-row">Current weather
             <div class="content">
                 <div class="left-section">
                     <div class="left-w">
@@ -60,37 +60,22 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
 
-        <!-- <div class="forecast mt-4"> -->
+        <div class="forecast mt-4">
+            <ul class="weather-cards">
             {% for day in data[1:] %}
-            <div class="forecast-day">
-                <ul class="weather-cards">
-                    <li class="card">
-                        <h3>{{ day.timestamp }}</h3>
-                        <!-- <p>Main: {{ day.main }}, {{ day.description }}</p> -->
-                        <!-- <div> -->
-                            <img src="https://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather Icon">
-                            <p>{{ day.temperature['temp'] }}°C</p>
-                        <!-- </div> -->
-                        <!-- <div class="weather"> -->
-                            <!-- <div class="left"> -->
-                                <!-- <p>Feels like: {{ day.temperature['feels_like'] }}°C</p>
-                                <p>Max temp: {{ day.temperature['temp_max'] }}°C</p>
-                                <p>Min temp: {{ day.temperature['temp_min'] }}°C</p> -->
-                            <!-- </div> -->
-                            <!-- <div class="right"> -->
-                                <!-- <p>Pressure: {{ day.temperature['pressure'] }}hPa</p> -->
-                                <p>Humidity: {{ day.temperature['humidity'] }}%</p>
-                                <p>Speed: {{ day.speed }} m/s</p>
-                            <!-- </div> -->
-                        <!-- </div> -->
-
-                    </li>
-                </ul>
-            </div>
+                <li class="card">
+                    <h3>{{ day.timestamp }}</h3>
+                    <img src="https://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather Icon">
+                    <p>Temp: {{ day.temperature['temp'] }}°C</p>
+                    <p>Humidity: {{ day.temperature['humidity'] }}%</p>
+                    <p>Speed: {{ day.speed }} m/s</p>
+                </li>
             {% endfor %}
-        <!-- </div> -->
+            </ul>
+        </div>
         {% endif %}
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
