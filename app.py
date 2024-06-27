@@ -71,7 +71,7 @@ def background(city):
         data = response.json()
         
         if 'items' in data and data['items']:
-            print(data['items'][0]['link'])
+            # print(data['items'][0]['link'])
             return data['items'][0]['link']
         else:
             print("No items found in the response.")
