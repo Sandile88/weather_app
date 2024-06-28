@@ -11,7 +11,7 @@
 </head>
 <body class="text-white" {% if background_image %} style="background-image: url('{{ background_image }}')" {% endif %}>
     <div class="text-center">
-        <h1 class="mt-5">Weather Report</h1>
+        <h1 class="mt-2">Weather Report</h1>
         <form action="/" method="post" class="mt-4">
             <div class="container">
                 <div class="row justify-content-center">
@@ -36,30 +36,24 @@
 
         {% if data %}
         <div class="current-weather">
-            <div class="header-row">Current weather
             <div class="content">
-                <div class="left-section">
-                    <div class="left-w">
-                        <h2>{{ data[0].timestamp }}</h2>
-                    </div>
-                    <div class="left-d">
-                        <p>Feels like: {{ data[0].temperature['feels_like'] }}°C</p>
-                        <p>Max temp: {{ data[0].temperature['temp_max'] }}°C</p>
-                        <p>Min temp: {{ data[0].temperature['temp_min'] }}°C</p>
-                    </div>
+                <div class="column left-section">
+                    <p>Feels like: {{ data[0].temperature['feels_like'] }}°C</p>
+                    <p>Max temp: {{ data[0].temperature['temp_max'] }}°C</p>
+                    <p>Min temp: {{ data[0].temperature['temp_min'] }}°C</p>
                 </div>
-                <div class="right-section">
-                    <div class="right-w">
-                        <p>Main: {{ data[0].main }}, {{ data[0].description }}</p>
-                        <img src="https://openweathermap.org/img/wn/{{ data[0].icon }}@2x.png" alt="Weather Icon">
-                    </div>
-                    <div class="right-d">
-                        <p>Pressure: {{ data[0].temperature['pressure'] }}hPa</p>
-                        <p>Humidity: {{ data[0].temperature['humidity'] }}%</p>
-                        <p>Speed: {{ data[0].speed }} m/s</p>
-                    </div>
+                <div class="column middle-section">
+                    <h1>Current Weather</h1>
+                    <h1>{{ city }}, {{ country }}</h1>
+                    <h2>{{ data[0].timestamp }}</h2>
                 </div>
-            </div>
+                <div class="column right-section">
+                    <p>Main: {{ data[0].main }}, {{ data[0].description }}</p>
+                    <img src="https://openweathermap.org/img/wn/{{ data[0].icon }}@2x.png" alt="Weather Icon">
+                    <p>Pressure: {{ data[0].temperature['pressure'] }}hPa</p>
+                    <p>Humidity: {{ data[0].temperature['humidity'] }}%</p>
+                    <p>Speed: {{ data[0].speed }} m/s</p>
+                </div>
             </div>
         </div>
 
@@ -68,6 +62,7 @@
             {% for day in data[1:] %}
                 <li class="card">
                     <h3>{{ day.timestamp }}</h3>
+                    <p>Main: {{ day.main }}, {{ day.description }}</p>
                     <img src="https://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather Icon">
                     <p>Temp: {{ day.temperature['temp'] }}°C</p>
                     <p>Humidity: {{ day.temperature['humidity'] }}%</p>

@@ -51,10 +51,10 @@ input, .btn::placeholder {
   color: #fff;
 }
 
-
 .current-weather {
   background: var(--transp-white-1);
   backdrop-filter: blur(10px);
+  margin: auto;
   padding: 1rem;
   border-radius: 10px;
   margin-bottom: 1rem;
@@ -63,55 +63,63 @@ input, .btn::placeholder {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 400px;
-  height: 555px;
-}
-
-
-.current-weather .header-row {
-  height: 22px;
-  font-size: 14px;
-  line-height: 22px;
-  font-weight: 600;
-  justify-content: flex-start;
-  white-space: nowrap;
-  overflow: hidden;
-
-
-
+  width: 600px;
+  height: auto;
 }
 
 .current-weather .content {
   display: flex;
   justify-content: space-between;
-  margin-top: 0.5rem;
-
+  padding-top: 0.5rem;
 }
 
-.left-section, .right-section {
+.current-weather .column {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
-.left-section h2 {
-  font-size: 18px;
-  font-weight: 600;
 
+ .left-section {
+  margin-top: auto;
+  /* order: 3; */
+}
+
+.middle-section, .right-section {
+  margin-left: 20px;
+}
+
+
+
+.middle-section h1, .middle-section h2 {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.middle-section h2 {
+  font-size: 20px;
+  font-weight: 300;
 }
 
 .right-section .right-w {
   text-transform: capitalize;
 }
+.right-section {
+  align-items: center;
 
+}
 
- .weather-cards {
+.right-section img {
+  margin-bottom: 10px;
+  max-width: 70px;
+  margin: 5px 0 -12px 0;
+}
+
+.weather-cards {
   display: flex;
-  /* flex-wrap: wrap; */
   gap: 20px;
   flex-direction: row;
   padding: 1rem;
-  /* justify-content: center; */
 }
 
 .weather-cards .card {
@@ -120,14 +128,10 @@ input, .btn::placeholder {
   border-radius: 5px;
   width: calc(100% / 5);
   align-items: center;
-  /* background: var(--transp-white-3);  */
   background: var(--transp-white-1);
-    border: 2px solid var(--blue-2);
-
-
+  border: 2px solid var(--blue-2);
+  text-transform: capitalize;
   backdrop-filter: blur(10px);
-
-
 }
 
 .weather-cards .card img {
@@ -141,20 +145,4 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-}
-
-/* small devs */
-@media(min-width: 300px){
-  .container{
-      width: 70vw;
-      height: 70vh;
-  }
-
-  .col-auto{
-      margin: 1rem;
-  }
-
-  .left{
-      margin: 1rem;
-  }
 }

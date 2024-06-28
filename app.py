@@ -92,17 +92,23 @@ def background(city):
 
 @app.route('/', methods = ['GET', 'POST'])
 def home():
-    try:  
+    try: 
+        city = None
+        country = None
         data = None
         error_message = None
         background_image = None
 
         if request.method == 'POST':
-            city = request.form['cityName'].lower()
-            country = request.form['countryName'].lower()
+            city = request.form['cityName'].capitalize()
+            country = request.form['countryName'].capitalize()
             weather_data_list = get_weather_data(city, country)
             # background_image = get_background_images(city)
             background_image = background(city)
+
+            # print(f"City: {city}, Country: {country}")
+            # print(f"Weather Data: {weather_data_list}")
+           
 
 
             if not city:
@@ -117,7 +123,7 @@ def home():
 
             data = weather_data_list
 
-        return render_template('data.html', data=data, error_message=error_message, background_image=background_image)
+        return render_template('data.html', city=city, country=country, data=data, error_message=error_message, background_image=background_image)
     except ConnectionError:
         exit('An internet connection error occured. Please try again.')
 
