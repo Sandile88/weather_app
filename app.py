@@ -72,7 +72,7 @@ def background(city):
         
         if 'items' in data and data['items']:
             # print(data['items'][0]['link'])
-            return data['items'][0]['link']
+            return data['items'][1]['link']
         else:
             print("No items found in the response.")
             return DEFAULT_BACKGROUND_IMAGE

@@ -60,7 +60,7 @@
         <div class="forecast mt-4">
             <ul class="weather-cards">
             {% for day in data[1:] %}
-                <li class="card">
+                <li class=" text-white card">
                     <h3>{{ day.timestamp }}</h3>
                     <p>Main: {{ day.main }}, {{ day.description }}</p>
                     <img src="https://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather Icon">
