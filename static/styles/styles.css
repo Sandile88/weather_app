@@ -3,10 +3,8 @@
   --off-white: #e5e5e5;
   --transp-white-1: rgba(255, 255, 255, 0.25);
   --transp-white-2: rgba(255, 255, 255, 0.18);
-  --blue-1: #62b8f5;
   --blue-2: #4475ef;
-  --blue-3: #2a4c9c; /* Add your desired darker blue color */
-  --blue-4: #1a3776; /* Add your desired darker blue color */
+  --blue-4: #1a3776;
   --shadow: rgba(3, 46, 87, 0.2);
 }
 
@@ -86,7 +84,6 @@ input, .btn::placeholder {
 
  .left-section {
   margin-top: auto;
-  /* order: 3; */
 }
 
 .middle-section, .right-section {

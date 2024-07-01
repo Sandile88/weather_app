@@ -37,26 +37,12 @@ Speed: {self.speed} m/s
 
 def get_weather_data(city, country):
     url= f'https://api.openweathermap.org/data/2.5/forecast?q={city},{country}&include=daily&appid={api_key}&units=metric'
-    # url = f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={api_key}'
     
     fetch = requests.get(url)
     response = fetch.json()
 
-    # lon = response['coord']['lon']
-    # lat = response['coord']['lat']
-    # print(lon, lat)
     with open ('info.json', 'w') as f:
         json.dump(response, f, indent=2)    
-
-    # exclude = 'minutely, hourly'
-    # url2 = f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={exclude}&appid={api_key}'
-
-    # fetch2 = requests.get(url2)
-    # response2 = fetch2.json()
-
-    # with open ('info2.json', 'w') as f:
-    #     json.dump(response2, f, indent=2)
-
     
 
     if 'message' in response and response['message'] == 'city not found':
@@ -100,13 +86,8 @@ def main():
             response = get_weather_data(city, country)
 
             if response:
-                # duplicate_timestamps = set()
-                # unique_weather_data = []
                 for weather in response:
-                    # if weather.timestamp not in duplicate_timestamps:
-                        # unique_weather_data.append(weather)
-                        # duplicate_timestamps.add(weather.timestamp)
-                        print(weather)
+                    print(weather)
                 break
 
         response_dict = [weather.__dict__ for weather in response]
